@@ -4,11 +4,24 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
+var passport = require('passport');
+var passportconfig = require('./config/passport')(passport);
+var flash = require('express-flash');
+var mongoose = require('mongoose');
+var MongoDBStore = require('connect-mongodb-session')(session);
+
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
 
 var app = express();
+
+var mongo_url = process.env.MONGO_URL;
+mongoose.Promise = global.Promise;
+mongoose.connect(mongo_url, {useMongoClient: true})
+    .then(()=> {console.log('Connected to MongoDB')})
+    .catch((err)=> {console.log('Error connecting', err);});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +35,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var store = new MongoDBStore({uri: mongo_url, collection: 'blogs'}, function (err) {
+    if (err){
+      console.log("Error, can't connect to MongoDB to store blogs", err);
+    }
+});
+
+app.use(session({
+    secret: "Secret",
+    resave: true,
+    saveUninitialized: true,
+    store: store
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
 app.use('/', index);
-app.use('/users', users);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
