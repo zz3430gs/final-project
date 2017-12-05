@@ -3,9 +3,10 @@ var Schema = mongoose.Schema;
 
 
 var blogSchema = new Schema({
+    title: String,
     text: String,
     dateCreated: Date,
-    comments: String
+    //comments: String
 
 });
 

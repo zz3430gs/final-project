@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var store = new MongoDBStore({uri: mongo_url, collection: 'blogs'}, function (err) {
+var store = new MongoDBStore({uri: mongo_url, collection: 'logs'}, function (err) {
     if (err){
       console.log("Error, can't connect to MongoDB to store blogs", err);
     }
