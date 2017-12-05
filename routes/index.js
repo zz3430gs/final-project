@@ -102,7 +102,7 @@ router.get('/blog/:_id', function (req, res, next) {
         });
 });
 
-/* POST to delete any bird sightings */
+/* POST to delete any blog */
 router.post('/delete', function(req, res, next){
 
     //delete a blog by id
