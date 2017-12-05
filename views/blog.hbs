@@ -3,5 +3,11 @@
 <div class="blog-info">
     <h2>Description</h2>
     <p>{{blog.text}}</p>
+    {{#if blog.image}}
+        <img src="{{blog.image}}">
+    {{else}}
+    {{/if}}
 
 </div>
+
+<!--TODO: Add in comments sections-->

@@ -30,16 +30,20 @@ router.post('/signup', passport.authenticate('local-signup',{
     failureFlash: true
 }));
 
+/*GET the secret site if the user is logged in*/
 router.get('/secret', isLoggedIn, function (req, res, next) {
+    //GET the collections and find the blog information in the database
     Blog.find().select({title: 1, text: 1}).sort({title: 1})
         .then((docs)=>{
             console.log(docs);
-            res.render('secret', {username: req.user.local.username});
+            res.render('secret', {username: req.user.local.username, blogs: docs});
         })
         .catch((err)=>{
             next(err);
         });
 });
+
+/*GET logout to logout of site*/
 router.get('/logout', function(req, res, next) {
     //passport middleware adds logout function to req object
     req.logout();
@@ -54,6 +58,7 @@ function isLoggedIn(req, res, next) {
     }
 }
 
+/*POST to creating blog*/
 router.post('/blogcreate', function (req, res, next) {
     res.render("createBlog")
 });
@@ -66,9 +71,8 @@ router.post('/addblog', function (req, res, next) {
     }
     else{
         //Insert into database.
-
         //Create a new Blog, an instance of the Blog schema, and call save()
-        new Blog({title: req.body.title, text: req.body.blogText, dateCreated: new Date()}).save()
+        new Blog({title: req.body.title, text: req.body.blogText, image: req.body.img, dateCreated: new Date()}).save()
             .then((newBlog)=>{
                 console.log('The new blog created is: ', newBlog);
                 res.redirect('/secret');
@@ -83,6 +87,7 @@ router.post('/addblog', function (req, res, next) {
 /*GET a blog site*/
 router.get('/blog/:_id', function (req, res, next) {
 
+    //get the information of a blog
     Blog.findOne({_id: req.params._id})
         .then((doc)=>{
             if(doc){
@@ -97,5 +102,19 @@ router.get('/blog/:_id', function (req, res, next) {
         });
 });
 
+/* POST to delete any bird sightings */
+router.post('/delete', function(req, res, next){
+
+    //delete a blog by id
+    Blog.deleteOne({_id : req.body._id})
+        .then((result)=>{
+            if(result.deletedCount === 1) {
+                res.redirect('/')
+            }
+        })
+        .catch((err) => {
+            next(err);
+        });
+});
 
 module.exports = router;
