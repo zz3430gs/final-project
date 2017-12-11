@@ -1,8 +1,73 @@
 body {
-  padding: 50px;
+  text-align: center;
+  padding: 45px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("../Images/gradient_bg1.png");
 }
 
 a {
   color: #00B7FF;
+}
+h2{
+  font-family: "Times New Roman", Times, Serif;
+  color: white;
+  padding: 25px;
+  font-size: 30px;
+}
+
+p{
+  font-size: 20px;
+  color: lightyellow;
+}
+.addblog{
+  padding: 5px 10px 6px !important;
+  font-size: 18px !important;
+  background-color: #a2a8b2;
+  font-weight: bold;
+  text-shadow: 1px 1px #a2a8b2;
+  color: #ffffff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #a2a8b2;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+.blogCreate{
+  padding: 5px 10px 5px !important;
+  font-size: 18px !important;
+  background-color: #a2a8b2;
+  font-weight: bold;
+  text-shadow: 1px 1px #a2a8b2;
+  color: #ffffff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #a2a8b2;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+.blogpage{
+  padding: 5px 10px 5px !important;
+  font-size: 18px !important;
+  background-color: #a2a8b2;
+  font-weight: bold;
+  text-shadow: 1px 1px #a2a8b2;
+  color: #ffffff;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #a2a8b2;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+.Comments{
+  padding: 20px;
 }

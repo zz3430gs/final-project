@@ -4,33 +4,15 @@
     <br/>
     <label for="blog">Description:</label>
     <br/>
+    <!--Type in the any information or data into the textarea box-->
     <textarea name="blogText" value="Type message..." style="height: 200px; width: 1100px;" onclick="this.value=''">Enter text here...</textarea>
     <br/>
-    <input type="submit" name="addblogbtn" value="Add Blog">
+    <!--Tries to upload an image to the page-->
+    <!--Haven't gotten it to work-->
+    <!--TODO:Able to add images or screenshots-->
+    Select image to upload:
+    <input type="file" name="pic" id="pic">
+    <br/>
+    <input type="submit" class="addblog" name="addblogbtn" value="Add Blog">
 
 </form>
-
-
-<!--TODO:Able to add images or screenshots-->
-<!--<input type="file" name="img" onchange="previewFile()"><br>-->
-<!--<img src="" height="200" alt="Image preview...">-->
-
-<!--<script>-->
-    <!--function previewFile(){-->
-        <!--var preview = document.querySelector('img'); //selects the query named img-->
-        <!--var file    = document.querySelector('input[type=file]').files[0]; //sames as here-->
-        <!--var reader  = new FileReader();-->
-
-        <!--reader.onloadend = function () {-->
-            <!--preview.src = reader.result;-->
-        <!--}-->
-
-        <!--if (file) {-->
-            <!--reader.readAsDataURL(file); //reads the data as a URL-->
-        <!--} else {-->
-            <!--preview.src = "";-->
-        <!--}-->
-    <!--}-->
-
-    <!--previewFile();  //calls the function named previewFile()-->
-<!--</script>-->

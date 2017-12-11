@@ -32,15 +32,7 @@ router.post('/signup', passport.authenticate('local-signup',{
 
 /*GET the secret site if the user is logged in*/
 router.get('/secret', isLoggedIn, function (req, res, next) {
-    //GET the collections and find the blog information in the database
-    Blog.find().select({title: 1, text: 1}).sort({title: 1})
-        .then((docs)=>{
-            console.log(docs);
-            res.render('secret', {username: req.user.local.username, blogs: docs});
-        })
-        .catch((err)=>{
-            next(err);
-        });
+    res.render('secret', {username: req.user.local.username})
 });
 
 /*GET logout to logout of site*/
@@ -59,11 +51,12 @@ function isLoggedIn(req, res, next) {
 }
 
 /*POST to creating blog*/
-router.post('/blogcreate', function (req, res, next) {
+router.post('/blogcreate', isLoggedIn, function (req, res, next) {
     res.render("createBlog")
 });
 
-router.post('/addblog', function (req, res, next) {
+/*POST to add a new blog to the database and save it*/
+router.post('/addblog', isLoggedIn, function(req, res, next) {
     if (!req.body || !req.body.blogText){
         //no blog text info, ignore and redirect to home page
         req.flash('error', 'please enter a blog');
@@ -72,12 +65,13 @@ router.post('/addblog', function (req, res, next) {
     else{
         //Insert into database.
         //Create a new Blog, an instance of the Blog schema, and call save()
-        new Blog({title: req.body.title, text: req.body.blogText, image: req.body.img, dateCreated: new Date()}).save()
-            .then((newBlog)=>{
-                console.log('The new blog created is: ', newBlog);
-                res.redirect('/secret');
-            })
-            .catch((err)=>{
+
+        new Blog({title: req.body.title, text: req.body.blogText, image: req.body.pic.toString(), dateCreated: new Date()}).save()
+            .then((newBlog)=> {
+                    console.log('The new blog created is: ', newBlog);
+                    res.redirect('/secret');
+                })
+            .catch((err) => {
                 next(err); //most likely to be a database error
             });
     }
@@ -85,7 +79,7 @@ router.post('/addblog', function (req, res, next) {
 });
 
 /*GET a blog site*/
-router.get('/blog/:_id', function (req, res, next) {
+router.get('/blog/:_id', isLoggedIn, function (req, res, next) {
 
     //get the information of a blog
     Blog.findOne({_id: req.params._id})
@@ -103,7 +97,7 @@ router.get('/blog/:_id', function (req, res, next) {
 });
 
 /* POST to delete any blog */
-router.post('/delete', function(req, res, next){
+router.post('/delete', isLoggedIn, function(req, res, next){
 
     //delete a blog by id
     Blog.deleteOne({_id : req.body._id})
@@ -116,5 +110,20 @@ router.post('/delete', function(req, res, next){
             next(err);
         });
 });
+
+/*POST to the blogpage*/
+//blogpage have all the blogs that were added to database and show it
+router.post('/blogpage', isLoggedIn, function (req, res, next) {
+    Blog.find().select({title: 1, text: 1}).sort({title: 1})
+        .then((docs)=>{
+            console.log(docs);
+            res.render('blogPage', { blogs: docs});
+        })
+        .catch((err)=>{
+            next(err);
+        });
+});
+
+
 
 module.exports = router;
