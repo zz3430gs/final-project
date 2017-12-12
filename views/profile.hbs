@@ -4,11 +4,11 @@
         <H3>Update Profile</H3>
         <!--Update the profile of the user-->
         <form class="Profile" action="/saveSecrets" method="POST">
-            <p> Name: <input type="text" name="name">  <br></p>
+            <p> Name: <input type="text" name="name" required>  <br></p>
             <p>Email: <input type="email" name="email"> <br></p>
-            <p> About: <textarea name="about" value="Type message..." style="height: 100px; width: 450px;" onclick="this.value=''">Enter text here...</textarea><br></p>
-            <p>Education: <textarea name="education" value="Type message..." style="height: 100px; width: 450px;" onclick="this.value=''">Enter text here...</textarea><br></p>
-            <p>Job: <textarea name="job" value="Type message..." style="height: 100px; width: 450px;" onclick="this.value=''">Enter text here...</textarea><br></p>
+            <p> About: <textarea name="about" value="Type message..." style="height: 100px; width: 450px;" onclick="this.value=''" required>Enter text here...</textarea><br></p>
+            <p>Education: <textarea name="education" value="Type message..." style="height: 100px; width: 450px;" onclick="this.value=''" required>Enter text here...</textarea><br></p>
+            <p>Job: <textarea name="job" value="Type message..." style="height: 100px; width: 450px;" onclick="this.value=''" required>Enter text here...</textarea><br></p>
             <input type="submit" name="updateSecrets" value="Update Secrets">
         </form>
     </body>
