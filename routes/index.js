@@ -32,7 +32,7 @@ router.post('/signup', passport.authenticate('local-signup',{
 
 /*GET the secret site if the user is logged in*/
 router.get('/secret', isLoggedIn, function (req, res, next) {
-    res.render('secret', {username: req.user.local.username})
+    res.render('secret', {username: req.user.local.username, profile: req.user.profile})
 });
 
 /*GET logout to logout of site*/
@@ -124,6 +124,46 @@ router.post('/blogpage', isLoggedIn, function (req, res, next) {
         });
 });
 
+router.post('/updateProfile', isLoggedIn, function(req, res, next){
+    res.render("profile")
 
+});
 
+router.post('/saveSecrets' ,isLoggedIn, function (req, res, next) {
+    // Check if the user has provided any new data
+    if (!req.body.education && !req.body.name && !req.body.job) {
+        req.flash('updateMsg', 'Please enter some new data');
+        return res.redirect('/secret')
+    }
+
+    //Collect any updated data from req.body, and add to req.user
+
+    if (req.body.name) {
+        req.user.profile.name = req.body.name;
+    }
+    if (req.body.education) {
+        req.user.profile.education = req.body.education;
+    }
+    if (req.body.job) {
+        req.user.profile.job = req.body.job;
+    }
+
+    //And save the modified user, to save the new data.
+    req.user.save(function(err) {
+        if (err) {
+            if (err.name == 'ValidationError') {
+                req.flash('updateMsg', 'Error updating, check your data is valid');
+            }
+            else {
+                return next(err);  // Some other DB error
+            }
+        }
+        else {
+            req.flash('updateMsg', 'Updated data');
+        }
+
+        //Redirect back to secret page, which will fetch and show the updated data.
+        return res.redirect('/secret');
+    })
+});
 module.exports = router;

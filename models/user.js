@@ -7,6 +7,12 @@ var userSchema = new mongoose.Schema({
         username: String,
         password: String
     },
+    profile:{
+        name: String,
+        education: String,
+        job: String
+
+    }
 
 });
 
