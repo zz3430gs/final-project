@@ -141,6 +141,12 @@ router.post('/saveSecrets' ,isLoggedIn, function (req, res, next) {
     if (req.body.name) {
         req.user.profile.name = req.body.name;
     }
+    if (req.body.about) {
+        req.user.profile.about = req.body.about;
+    }
+    if (req.body.name) {
+        req.user.profile.email = req.body.email;
+    }
     if (req.body.education) {
         req.user.profile.education = req.body.education;
     }

@@ -11,7 +11,7 @@ a {
 h2{
   font-family: "Times New Roman", Times, Serif;
   color: white;
-  padding: 25px;
+  padding: 15px;
   font-size: 30px;
 }
 
@@ -69,7 +69,24 @@ p{
 }
 h3{
   font-family: "Times New Roman", Times, Serif;
-  color: aquamarine;
+  color: lightslategrey;
   padding: 20px;
   font-size: 25px;
+}
+
+.profile{
+  background: -webkit-linear-gradient(top, #a7c3f2,#92b2a5 175px);
+  background: -moz-linear-gradient(bottom, #a7c3f2, #92b2a5 175px);
+  background: linear-gradient(bottom, #a7c3f2, #92b2a5 175px);
+  margin: auto;
+  position: relative;
+  width: 650px;
+  height: 750px;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: bold;
+  border-radius: 10px;
+  color: gray;
+  text-align: center;
 }
